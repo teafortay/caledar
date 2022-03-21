@@ -7,9 +7,12 @@ Created on Sun Feb 13 16:41:56 2022
 
 This file is a python program to solve the wood calendar puzzle
  game. I'm using a brute force approach, halting when I find an 
- invalid board. The worst case runtime is 46**8. Including all
+ invalid board. The worst case runtime is O(46**8). Including all
  orientations, there are 46 pieces- but only 8 actual pieces. The 
- board is 7x7, I've hard coded the board size.'
+ board is 7x7, I've hard coded the board size.
+ 
+ Because I deepcopy the board many times, this algorithm also takes 
+ a lot of space.
 """
 
 import copy
@@ -111,8 +114,6 @@ allPieces = [pieceA0, pieceA1, pieceB0, pieceB1, pieceB2, pieceB3, pieceC0,
 
 
 
-# print(len(allPieces))
-
 
 board = [["_", "_", "M", "_", "_", "_", "X"], #JAN-JUN
          ["_", "_", "_", "_", "_", "_", "X"], #JUL-DEC
@@ -122,12 +123,13 @@ board = [["_", "_", "M", "_", "_", "_", "X"], #JAN-JUN
          ["_", "_", "_", "_", "_", "_", "_"], #22-28
          ["_", "_", "_", "X", "X", "X", "X"]] #29-31
 
-# JAN = [0][0]
-# FEB = [0][1]
-# MAR = [0][2]
-# APR = [0][3]
-# MAY = [0][4]
-# JUN = [0][5]
+#dates
+JAN = (0, 0)
+FEB = (0, 1)
+MAR = (0, 2)
+APR = (0, 3)
+MAY = (0, 4)
+JUN = (0, 5)
 
 # board[0][1] = "0"
 

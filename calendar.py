@@ -31,14 +31,14 @@ class Piece:
     
 #CONSTANTS   
 O = "_"
-a = "💜"
-b = "🧡"
-c = "💚"
+a = "🟪"
+b = "🟦"
+c = "❎"
 d = "🛑"
-e = "💙"
-f = "🤎"
-g = "💛"
-h = "🤍"
+e = "🟧"
+f = "🟫"
+g = "🟨"
+h = "🔳"
     
 #the 2x3 rectangle
 pieceA0 = Piece(a,[[a, a, a], [a, a, a]])
@@ -115,12 +115,12 @@ allPieces = [pieceA0, pieceA1, pieceB0, pieceB1, pieceB2, pieceB3, pieceC0,
 
 
 
-board = [["_", "_", "M", "_", "_", "_", "X"], #JAN-JUN
+board = [["_", "_", "Mr", "_", "_", "_", "X"], #JAN-JUN
          ["_", "_", "_", "_", "_", "_", "X"], #JUL-DEC
          ["_", "_", "_", "_", "_", "_", "_"], #1-7
-         ["_", "_", "_", "_", "0", "_", "_"], #8-14
+         ["_", "_", "_", "_", "_", "_", "_"], #8-14
          ["_", "_", "_", "_", "_", "_", "_"], #15-21
-         ["_", "_", "_", "_", "_", "_", "_"], #22-28
+         ["22", "_", "_", "_", "_", "_", "_"], #22-28
          ["_", "_", "_", "X", "X", "X", "X"]] #29-31
 
 #dates
@@ -138,7 +138,11 @@ def printBoard(board):
         print(board)
         return
     for row in board:
-        print(row)
+        # print(row)
+        line = ""
+        for elem in row:
+            line += elem
+        print(line)
   
 
 

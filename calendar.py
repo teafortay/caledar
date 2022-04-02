@@ -16,6 +16,7 @@ This file is a python program to solve the wood calendar puzzle
 """
 
 import copy
+import random
 
 class Piece:
     def __init__(self, typ, pieceArray, offset=0):
@@ -115,23 +116,59 @@ allPieces = [pieceA0, pieceA1, pieceB0, pieceB1, pieceB2, pieceB3, pieceC0,
 
 
 
-board = [["_", "_", "Mr", "_", "_", "_", "X"], #JAN-JUN
-         ["_", "_", "_", "_", "_", "_", "X"], #JUL-DEC
-         ["_", "_", "_", "_", "_", "_", "_"], #1-7
+board = [["_", "_", "_", "Apr", "_", "_", " X"], #JAN-JUN
+         ["_", "_", "_", "_", "_", "_", " X"], #JUL-DEC
+         ["01", "_", "_", "_", "_", "_", "_"], #1-7
          ["_", "_", "_", "_", "_", "_", "_"], #8-14
          ["_", "_", "_", "_", "_", "_", "_"], #15-21
-         ["22", "_", "_", "_", "_", "_", "_"], #22-28
-         ["_", "_", "_", "X", "X", "X", "X"]] #29-31
+         ["_", "_", "_", "_", "_", "_", "_"], #22-28
+         ["_", "_", "_", " X", " X", " X", " X"]] #29-31
 
 #dates
-JAN = (0, 0)
-FEB = (0, 1)
-MAR = (0, 2)
-APR = (0, 3)
-MAY = (0, 4)
-JUN = (0, 5)
+dateDict = {
+    "Jan" : (0, 0), "Feb" : (0, 1), "Mar" : (0, 2), "Apr" : (0, 3),
+    "May" : (0, 4), "Jun" : (0, 5), "Jul" : (1, 0), "Aug" : (1, 1),
+    "Sep" :(1, 2), "Oct" : (1, 3), "Nov" : (1, 4), "Dec" : (1, 5),
+    "01" :(2, 0), "02" : (2, 1), "03" : (2, 2), "04" : (2, 3), "05" : (2, 4),
+    "06" : (2, 5), "07" : (2, 6), "08" : (3, 0), "09" : (3, 1), "10" : (3, 2),
+    "11" : (3, 3), "12" : (3, 4), "13" : (3, 5), "14" : (3, 6), "15" : (4, 0),
+    "16" : (4, 1), "17" : (4, 2), "18" : (4, 3), "19" : (4, 4), "20" : (4, 5),
+    "21" : (4, 6), "22" : (5, 0), "23" : (5, 1), "24" : (5, 2), "25" : (5, 3),
+    "26" : (5, 4), "27" : (5, 5), "28" : (5, 6), "29" : (6, 0), "30" : (6, 1),
+    "31" : (6, 2)}
 
 # board[0][1] = "0"
+
+def solveFromDate(month, day):
+    """
+    Parameters
+    ----------
+    month : string
+        DESCRIPTION. to look up in dictionary
+    day : String
+        DESCRIPTION. to look up in dictionary
+    
+
+    Returns
+    -------
+    None. prints board
+
+    """
+    blankBoard = [["_", "_", "_", "_", "_", "_", " X"], #JAN-JUN
+             ["_", "_", "_", "_", "_", "_", " X"], #JUL-DEC
+             ["_", "_", "_", "_", "_", "_", "_"], #1-7
+             ["_", "_", "_", "_", "_", "_", "_"], #8-14
+             ["_", "_", "_", "_", "_", "_", "_"], #15-21
+             ["_", "_", "_", "_", "_", "_", "_"], #22-28
+             ["_", "_", "_", " X", " X", " X", " X"]] #29-31
+    monthRow, monthCol = dateDict[month]
+    dayRow, dayCol = dateDict[day]
+    blankBoard[monthRow][monthCol] = month 
+    blankBoard[dayRow][dayCol] = day
+    random.shuffle(allPieces)
+    solution = solve(allPieces, blankBoard)
+    printBoard(solution)
+    
 
 def printBoard(board):
     if board is None:
@@ -343,12 +380,12 @@ def placePieceOnBoard(board, piece):
 #          ["a", "a", "a", "0", "0", "d", "0"], #15-21
 #          ["c", "0", "c", "0", "d", "d", "d"], #22-28
 #          ["c", "c", "c", "X", "X", "X", "X"]] #29-31
-new = solve(allPieces, board)
+# new = solve(allPieces, board)
+# # printBoard(new)
 # printBoard(new)
 print("Result of solve:")
-printBoard(new)
+solveFromDate("Apr", "03")
 print("* end result *")
-
 
 
 
